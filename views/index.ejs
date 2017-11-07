@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Formulario</title>
+</head>
+<body>
+	<h1><%= title %></h1>
+	<h1><%=saludo %></h1>
+	<h2>Formulario</h2>
+	<% if(errors){%>
+		<ul>
+		<% errors.forEach(function(error){%>
+			 <li><%= errors.msg%></li>
+		<%})%>
+		</ul>
+	<%}%>
+	<form action="/users/add" method="post">
+		<label>Nombre</label>
+		<input type="text" name="nombre"><br>
+		<label>Calificacion</label>
+		<input type="number" name="telefono"><br>
+		<label>Fecha de inicio</label>
+		<input type="date" name="fechaInicio"><br>
+		<label>Caracteristicas</label><br>
+		<select name="opciones">
+			<option value=0>Muy Bajo</option>
+			<option value=1>Bajo</option>
+		  <option value=2>Medio</option>
+			<option value=3>Alto</option>
+			<option value=4>Muy Alto</option>
+    </select><br>
+		<input type="submit">
+		<select name="cars">
+			<% nombres.forEach(function(nombres) { %>
+				<option value=<%nombres.nombres%>><%= nombres.nombre%></option>
+			<% }); %>
+		</select>
+	</form>
+	<a href="/views/tabla">Tabla</a>
+	<a href="/views/Pantalla_1">Pantalla 1</a>
+</body>
+</html>
