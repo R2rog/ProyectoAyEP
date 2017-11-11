@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
-	<title>Establecimiento de Criterios</title>
+	<title>Establecimiento de Criterio</title>
 	<link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
@@ -23,58 +23,43 @@
 	<div class="container right-align">
 		<div class="row">
 		<div class="col s12 center-align">
-		    <table class="centered bordered highlight center-align">
-		        <thead>
-		          <tr>
-		              <th>Criterio</th>
-		              <th>Tipo</th>
-		              <th>Ponderación</th>
-		        </thead>
-
-		        <tbody>
-		          <tr class="center-align">
-		            <td>Duración (en meses)</td>
-		            <td>Cuantitativo</td>
-		            <td ><input id="" type="number" class="validate"></td>
-		          </tr>
-		          <tr>
-		            <td>Valor presente neto</td>
-		            <td>Cuantitativo</td>
-		            <td><input id="" type="number" class="validate"></td>
-		          </tr>
-		          <tr>
-		            <td>Periodo de recuperación de la inversión (en meses)</td>
-		            <td>Cuantitativo</td>
-		            <td><input id="" type="number" class="validate"></td>
-		          </tr>
-		          <tr>
-		            <td>Riesgo</td>
-		            <td>Cuantitativo</td>
-		            <td><input id="" type="number" class="validate"></td>
-		          </tr>
-		          <tr>
-		            <td>Generación de tecnología propietaria</td>
-		            <td>Cuantitativo</td>
-		            <td><input id="" type="number" class="validate"></td>
-		          </tr>
-
-		          <tr>
-		            <td></td>
-		            <td></td>
-		            <td><input id="" type="number" class="validate"></td>
-		          </tr>
-		        </tbody>
-		    </table>
+			<table style="width:100%" id="tablaCriterios">
+				<tr>
+					<th>Criterio</th>
+					<th>Tipo</th>
+					<th>Calificacion</th>
+				</tr>
+					<% criterios.forEach(function(criterio) { %>
+						<tr>
+						<th><%=criterio.nombre%></th>
+						 <%if(criterio.tipo==0){%>
+							<%criterio.tipo='Cuantitativo'%>
+							<th><%= criterio.tipo%></th>
+							<th><input type="number" name="ponderacion" ></th>
+						<%} else {%>
+							 <%criterio.tipo='Cualitativo';%>
+							 <th><%=criterio.tipo%></th>
+							 <th>	<select name="calificacion" class="browser-default" label="Calificacion">
+							      <option value="" disabled selected>Calificacion</option>
+							 			<option value=0>- Muy bajo-</option>
+										<option value=1>- Bajo-</option>
+										<option value=2>- Moderado-</option>
+										<option value=3>-Alto-</option>
+										<option value=4>- Muy Alto-</option>
+										</select>
+							 </th>
+						 <%}%>
+						</tr>
+					<% });%>
+			</table>
 		    <div class="modal-footer left-align">
-		      <a href="Pantalla_3.html" class="waves-effect waves-green btn-large left-align">Agregar Criterio</a>
+		      <a href="Pantalla_3" class="waves-effect waves-green btn-large left-align">Agregar Criterio</a>
 		    </div>
 	    </div>
 	    </div>
     </div>
 	<div class="fixed-action-btn horizontal click-to-toggle">
-		<a class="btn-floating waves-effect waves-light btn-large " href="Pantalla_4.html" onclick=""><i class="large material-icons">arrow_forward</i></a>
+		<a class="btn-floating waves-effect waves-light btn-large " href="Pantalla_4" onclick=""><i class="large material-icons">arrow_forward</i></a>
 	</div>
-
-
 </body>
 </html>

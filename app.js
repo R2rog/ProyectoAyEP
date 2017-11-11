@@ -14,7 +14,7 @@ var connection = mysql.createConnection({
   user     : 'root',
   password : 'root',
 	port: 8889,//Puerto del servidor de PHP my admin.
-  database: 'prueba'
+  database: 'proyectowebg'
 });
 //Checando la conexión a la base de datos.
 connection.connect(function(err) {
@@ -36,7 +36,7 @@ app.set('views',path.join(__dirname,'views'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
-//Valores estáticos: CSS.
+//Valores estáticos: CSS, Imágenes, JS.
 app.use(express.static(path.join(__dirname,'public')));
 
 //Variables gloales.
@@ -64,37 +64,75 @@ app.use(expressValidator({
 
 //Crea la página principal.
 app.get('/',function(req,res){
-  connection.query('select nombre from clientes',function(err,result){
+      res.render('Pantalla_1');
+});
+
+//Render de la pantalla 2
+app.get('/views/Pantalla_2',function(req,res){
+  connection.query('select nombre, tipo, ponderacion from extra_criterio',function(err,result){
       if(err){
         console.error(err);
+        res.status(400).send('Error con la base de datos');
         return;
       }
       else{
         console.error(result);
-        var nombres=result;
+        var criterios=result;//Guardando el resultado del query en la variable.
+        res.render('Pantalla_2',{
+           criterios:criterios//Arreglo queu fue el resultado de la consulta.
+        });
       }
-	res.render('index',{
-		title:'Inicio',
-		saludo:'Hola Arturo',
-    nombres:nombres
-	 });
-  });
-
-
 });
-
-//Render de la pantalla 1
-app.get('/views/Pantalla_1',function(req,res){
-  res.render('Pantalla_1');
-});
-//Render de la pantalla 2
-app.get('/views/Pantalla_2',function(req,res){
-  res.render('Pantalla_2');
 });
 //Render de la pantalla 3
 app.get('/views/Pantalla_3',function(req,res){
   res.render('Pantalla_3');
 });
+//Formulario del nuevo criterio.
+app.post('/views/Pantalla_3', function(req,res){
+  req.checkBody('nombre','El nombre del criterio es requerido').notEmpty();
+  req.checkBody('tipo','Se requiere seleccionar el tipo del criterio').notEmpty();
+  var errors=req.validationErrors();
+	if(errors){
+		res.render('Pantalla_3',{
+			errors: errors
+		});
+      console.log(errors);
+	}
+	else{
+    var criterio={
+      nombre: req.body.nombre,
+      ponderacion: req.body.ponderacion,
+      tipo: req.body.tipo,
+      calificacion: req.body.calificacion
+    };
+      var query= connection.query('insert into extra_criterio set ?',criterio,function(err,result){
+            if(err){
+              console.error(err);
+              return;
+            }
+            else{
+              console.error(result);
+              console.log(query);
+            }
+          });
+          query= connection.query('select nombre, tipo, ponderacion from extra_criterio',function(err,result){
+              if(err){
+                console.error(err);
+                res.status(400).send('Error con la base de datos');
+                return;
+              }
+              else{
+                console.error(result);
+                var criterios=result;//Guardando el resultado del query en la variable.
+                res.render('Pantalla_2',{
+                   criterios:criterios//Arreglo queu fue el resultado de la consulta.
+                });
+              }
+        });
+      }
+});
+
 //Render de la pantalla 4
 app.get('/views/Pantalla_4',function(req,res){
   res.render('Pantalla_4');
@@ -164,3 +202,10 @@ app.post('/users/add',function(req,res){
 app.listen(port,function(){
 	console.log("El servidor esta corriendo");
 });
+
+/*echo "# ProyectoAyEP" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/R2rog/ProyectoAyEP.git
+git push -u origin master*/

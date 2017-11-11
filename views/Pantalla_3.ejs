@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -39,36 +39,43 @@
 	<div class="container center-align">
 		<div class="row center-align">
 		    <div class="input-field col s12">
-		    <form id="form1" method="post" action="">
+					<% if(errors){%>
+							<ul>
+							<% errors.forEach(function(error){%>
+								 <li style="color: red"><%= error.msg%></li>
+							<%})%>
+							</ul>
+					<%}%>
+		    <form id="form1" action="Pantalla_3" method="post" >
 		    	<div>
 	          	Nuevo Criterio:
 	        	<div class="input-field inline">
-	            <input id="n_criterio" type="text" class="validate">
+	            <input name="nombre" id="nombre" type="text" class="validate">
 	            </div>
 	            <div class="center-align">
 			        <p>
-				      <input name="group1" type="radio" id="test1" />
+				      <input name="tipo" value=0 type="radio" id="test1" />
 				      <label for="test1">Cuantitativo (El criterio acepta valores numéricos)</label>
 				    </p>
 				    <p>
-				      <input name="group1" type="radio" id="test2" />
+				      <input name="tipo" value=1 type="radio" id="test2" />
 				      <label for="test2">Cualitativo (Se elige una de las categorías establecidas)</label>
 
 				    <!-- Dropdown Trigger -->
-					   <a class='dropdown-button btn cyan accent-4' data-beloworigin="true" href='#' data-activates='dropdown1' style="margin-left: 30px;">Categorias</a>
+					   <!--<a class='dropdown-button btn cyan accent-4' data-beloworigin="true" href='#' data-activates='dropdown1' style="margin-left: 30px;">Categorias</a>-->
 
 					  <!-- Dropdown Structure -->
-					  <ul id='dropdown1' class='dropdown-content' style="margin-left: 30px;">
-					    <li><a href="#!">Muy Bajo</a></li>
-					    <li><a href="#!">Bajo</a></li>
-					    <li><a href="#!">Moderado</a></li>
-					    <li><a href="#!">Alto</a></li>
-					    <li><a href="#!">Muy Alto</a></li>
-					  </ul>
+	  					<select name="ponderacion">
+									<option value="" disabled selected>Categorias</option>
+									<option value="0">Muy bajo</option>
+									<option value="1">Bajo</option>
+									<option value="2">Moderado</option>
+									<option value="3">Alto</option>
+									<option value="4">Muy alto</option>
+							</select>
 					  </p>
-
 					<div class="input-field col s3">
-					    <select>
+					    <select name="calificacion">
 					      <option value="" disabled selected>Escoge una calificación</option>
 					      <option value="1">Menor</option>
 					      <option value="2">Mayor</option>
@@ -76,10 +83,11 @@
 				    <label>Mejor calificación es otorgada al valor</label>
 				  	</div>
 			    </div>
+					<input type="submit">
 			</form>
 			</div>
 
-				<a type = "submit" form = "form1" value =submit class="btn-floating waves-effect waves-light btn-large " href="Pantalla_2" onclick=""><i class="large material-icons">add</i></a>
+			<!--<a type = "submit" form = "form1" value =submit class="btn-floating waves-effect waves-light btn-large " href="Pantalla_2" onclick=""><i class="large material-icons">add</i></a>-->
 
     </div>
 
