@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<title>Nuevo criterio</title>
+	<link href="/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="/js/materialize.js"></script>
+	<script src="/js/init.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			 $('.dropdown-button').dropdown({
+		      inDuration: 300,
+		      outDuration: 225,
+		      constrainWidth: false, // Does not change width of dropdown to that of the activator
+		      hover: true, // Activate on hover
+		      gutter: 0, // Spacing from edge
+		      belowOrigin: false, // Displays dropdown below the button
+		      alignment: 'left', // Displays dropdown with edge aligned to the left of button
+		      stopPropagation: false // Stops event propagation
+		    }
+		  );
+			$('select').material_select();
+		});
+    </script>
+</head>
+<body background="/img/fondo.jpg" >
+	<div class="navbar-fixed ">
+		<nav>
+			<div class="nav-wrapper  teal lighten-2">
+			 	<ul class="brand-logo left" style="margin-left: 7%; font-family: 'Roboto-Italic';">
+			        <li><i class="white-text left "><img src="/img/Tec-de-Monterrey-Logo.jpg" width="40" height="40" class="circle responsive-img" style="margin-top: 30% "></i><span class="white-text" style="font-size: 22px;">Tecnológico de Monterrey Campus Hidalgo</span></li>
+			    </ul>
+			</div>
+		 </nav>
+	</div>
+	<div class="container center-align">
+		<div class="row center-align">
+		    <div class="input-field col s12">
+		    <form id="form1" method="post" action="">
+		    	<div>
+	          	Nuevo Criterio:
+	        	<div class="input-field inline">
+	            <input id="n_criterio" type="text" class="validate">
+	            </div>
+	            <div class="center-align">
+			        <p>
+				      <input name="group1" type="radio" id="test1" />
+				      <label for="test1">Cuantitativo (El criterio acepta valores numéricos)</label>
+				    </p>
+				    <p>
+				      <input name="group1" type="radio" id="test2" />
+				      <label for="test2">Cualitativo (Se elige una de las categorías establecidas)</label>
+
+				    <!-- Dropdown Trigger -->
+					   <a class='dropdown-button btn cyan accent-4' data-beloworigin="true" href='#' data-activates='dropdown1' style="margin-left: 30px;">Categorias</a>
+
+					  <!-- Dropdown Structure -->
+					  <ul id='dropdown1' class='dropdown-content' style="margin-left: 30px;">
+					    <li><a href="#!">Muy Bajo</a></li>
+					    <li><a href="#!">Bajo</a></li>
+					    <li><a href="#!">Moderado</a></li>
+					    <li><a href="#!">Alto</a></li>
+					    <li><a href="#!">Muy Alto</a></li>
+					  </ul>
+					  </p>
+
+					<div class="input-field col s3">
+					    <select>
+					      <option value="" disabled selected>Escoge una calificación</option>
+					      <option value="1">Menor</option>
+					      <option value="2">Mayor</option>
+					    </select>
+				    <label>Mejor calificación es otorgada al valor</label>
+				  	</div>
+			    </div>
+			</form>
+			</div>
+
+				<a type = "submit" form = "form1" value =submit class="btn-floating waves-effect waves-light btn-large " href="Pantalla_2" onclick=""><i class="large material-icons">add</i></a>
+
+    </div>
+
+
+
+</body>
+</html>
